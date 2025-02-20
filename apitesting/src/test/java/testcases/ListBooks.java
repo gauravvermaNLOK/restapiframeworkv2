@@ -1,7 +1,6 @@
 package testcases;
 
 import java.util.HashMap;
-
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.Reporter;
@@ -14,9 +13,13 @@ import testcasehelper.HTTPMethods.RESPONSE;
 public class ListBooks extends BaseTestClass{
 	
 	@Test()
-	public void getAllBooks(ITestContext context)
+	public void getAllBooks(ITestContext testContext)
 	{
-		String strAPIStatus = (String) context.getAttribute(keyStore.API_STATUS.toString());
+		System.out.println("Suite Context : " + testContext.getSuite().getAttribute(keyStore.API_STATUS.toString()));
+		String strAPIStatus = (String) testContext.getAttribute(keyStore.API_STATUS.toString());
+		System.out.println("Test Context : " + strAPIStatus);
+
+		
 		ITestNGMethod method = Reporter.getCurrentTestResult().getMethod();
 		String strUrl = getValues.getApiRequestUrl(method);
 		

@@ -1,7 +1,6 @@
 package testcases;
 
 import java.util.HashMap;
-
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.Reporter;
@@ -15,7 +14,7 @@ import testcasehelper.HTTPMethods.RESPONSE;
 public class APIStatus extends BaseTestClass {
 	
 	@Test
-	public void getAPIStatus(ITestContext context)
+	public void getAPIStatus(ITestContext testContext)
 	{
 		ITestNGMethod method = Reporter.getCurrentTestResult().getMethod();
 		String strAPIUrl = getValues.getApiRequestUrl(method);
@@ -23,7 +22,8 @@ public class APIStatus extends BaseTestClass {
 		Response response =(Response)mapResponse.get(RESPONSE.RESPONSE_OBJECT);
 		String strStatus = response.jsonPath().getString("status");
 		AllureUtils.logResult(strStatus, "OK", "Validate Status", null, null);
-		context.setAttribute(keyStore.API_STATUS.toString(), "OK");
+		testContext.setAttribute(keyStore.API_STATUS.toString(), "OK");//available in test tag
+		testContext.getSuite().setAttribute(keyStore.API_STATUS.toString(), "OK");//available in suit tag
 	}
 
 }
